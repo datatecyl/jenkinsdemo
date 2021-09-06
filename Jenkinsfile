@@ -4,7 +4,7 @@ pipeline {
         stage('Preparation') {
             steps {
                 script {           
-                    def services = powershell "Get-Service -Name '*HL7*' -ErrorAction SilentlyContinue"
+                    def services = powershell(returnStdout: true, script: "Get-Service -Name '*HL7*' -ErrorAction SilentlyContinue")
                     powershell "${services}"
                     powershell "${services}.length"
                     
