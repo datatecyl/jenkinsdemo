@@ -3,10 +3,8 @@ pipeline {
     stages {
         stage('Preparation') {
             steps {
-                script {
-                    def listAvailableServices = "Get-Service -Name '*HL*' -ErrorAction SilentlyContinue"
-                    def availableService = powershell(returnStdout: true, script: listAvailableServices)                
-                    powershell "Write-Host ${availableService}"
+                script {           
+                    powershell "Get-Service -Name '*HL7*' -ErrorAction SilentlyContinue"
                     
 /*
                     def StopService= "Stop-Service '*HL*'"
