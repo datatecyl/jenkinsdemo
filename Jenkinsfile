@@ -5,7 +5,9 @@ pipeline {
             steps {
                 def listAvailableServices = "Get-Service -Name '*HL*' -ErrorAction SilentlyContinue"
                 def availableService = powershell(returnStdout: true, script: listAvailableServices)                
-                Write-Host availableService
+                powershell "Write-Host ${availableService}"
+                powershell 'Write-Host ${availableService}'
+                
                 def StopService= "Stop-Service '*HL*'"
                 powershell(returnStdout: false, script: StopService)
                 $maxTimeout = New-TimeSpan -Seconds 10
