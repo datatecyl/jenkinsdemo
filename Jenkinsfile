@@ -8,11 +8,11 @@ pipeline {
                     if (services != null) {
                         def StopService= "Stop-Service '*HL7*'"
                         def stopIt = powershell(returnStdout: true, script: StopService)                
-                        def waitStopService = "(Get-Service '*HL*').WaitForStatus('Stopped', '00:00:10')"
+                        def waitStopService = "(Get-Service '*HL7*').WaitForStatus('Stopped', '00:00:10')"
                         try {
                             def stopServiceResponse = powershell(returnStdout: true, script: waitStopService)                            
                             println stopServiceResponse
-                        } catch (exception e) {
+                        } catch (Exception  e) {
                             println "stop failed."
                         }
                     }
