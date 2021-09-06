@@ -1,9 +1,18 @@
 pipeline {
     agent any 
     stages {
-        stage('Stage 1') {
+        stage('Preparation') {
             steps {
-                echo 'Hello world!' 
+                def listAvailableServices = "Get-Service -Name '*HL*' -ErrorAction SilentlyContinue"
+                def availableService = powershell(returnStdout: true, script: listAvailableServices)                
+                Write-Host availableService
+                def StopService= "Stop-Service '*HL*'"
+                powershell(returnStdout: false, script: StopService)
+                $maxTimeout = New-TimeSpan -Seconds 10
+                def waitStopService = "(Get-Service '*HL*').WaitForStatus('Stopped', ${$maxTimeout})"
+                def stopServiceResponse = powershell(returnStdout: true, script: waitStopService)
+                Write-Host stopServiceResponse
+                
             }
         }
     }
