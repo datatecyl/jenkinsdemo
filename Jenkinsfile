@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script {           
                     def services = powershell(returnStdout: true, script: "Get-Service -Name '*HL7*' -ErrorAction SilentlyContinue")
-                    powershell "Write-Host ${services}"
+                    println services
  /*                   powershell "${services}.length"
                     
 
