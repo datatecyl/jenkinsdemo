@@ -10,8 +10,8 @@ pipeline {
                 
                 def StopService= "Stop-Service '*HL*'"
                 powershell(returnStdout: false, script: StopService)
-                $maxTimeout = New-TimeSpan -Seconds 10
-                def waitStopService = "(Get-Service '*HL*').WaitForStatus('Stopped', ${$maxTimeout})"
+                $maxTimeout = powershell (New-TimeSpan -Seconds 10)
+                def waitStopService = "(Get-Service '*HL*').WaitForStatus('Stopped', ${maxTimeout})"
                 def stopServiceResponse = powershell(returnStdout: true, script: waitStopService)
                 powershell  "Write-Host ${stopServiceResponse}"
                 
