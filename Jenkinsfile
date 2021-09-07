@@ -27,8 +27,8 @@ pipeline {
                             println startServiceResponse
                         } catch (Exception  e) {
                             println "start failed."
-                        }*/
-                    }
+                        }
+                    }*/
                 }
             }
         }
