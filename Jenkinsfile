@@ -4,7 +4,9 @@ pipeline {
         stage('Preparation') {
             steps {
                 script {           
-                    def services = powershell(returnStdout: true, script: "Get-Service -Name '*HL7*' -ErrorAction SilentlyContinue")
+                    //def services = powershell(returnStdout: true, script: "Get-Service -Name '*HL7*' -ErrorAction SilentlyContinue")
+                    println new File(".").absolutePath
+
                     /*if (services != null) {
                         def StopService= "Stop-Service '*HL7*'"
                         def stopIt = powershell(returnStdout: true, script: StopService)                
@@ -16,7 +18,7 @@ pipeline {
                             println "stop failed."
                         }
                      */
-                       if (services != null) {
+                       /*if (services != null) {
                         def StartService= "Start-Service '*HL7*'"
                         def startIt = powershell(returnStdout: true, script: StartService)                
                         def waitStartService = "(Get-Service '*HL7*').WaitForStatus('Running', '00:00:10')"
@@ -25,7 +27,7 @@ pipeline {
                             println startServiceResponse
                         } catch (Exception  e) {
                             println "start failed."
-                        }
+                        }*/
                     }
                 }
             }
