@@ -5,8 +5,9 @@ pipeline {
             steps {
                 script {           
                     //def services = powershell(returnStdout: true, script: "Get-Service -Name '*HL7*' -ErrorAction SilentlyContinue")
-                    println new File(".").absolutePath
-
+                    def currentPath = powershell(returnStdout: true, script: "(Get-Item .).FullName")
+                    println currentPath
+                    
                     /*if (services != null) {
                         def StopService= "Stop-Service '*HL7*'"
                         def stopIt = powershell(returnStdout: true, script: StopService)                
